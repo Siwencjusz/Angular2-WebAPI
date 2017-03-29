@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Template.DAL
+namespace Commons.DTOs.BaseDto
 {
-    public class Class1
+    public class BaseDto:IBaseDto
     {
+        public int Id { get; set; }
     }
 }
