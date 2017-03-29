@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Commons
+namespace Commons.Entities.BaseEntity
 {
-    public class Class1
+    public interface IBaseEntity
     {
+       int Id { get; set; }
     }
 }
