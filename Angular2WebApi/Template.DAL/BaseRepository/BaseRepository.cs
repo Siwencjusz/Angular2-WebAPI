@@ -14,20 +14,14 @@ namespace Template.DAL.BaseRepository
 {
     public class BaseRepository : IBaseRepository<BaseEntity, BaseDto>
     {
-        // ReSharper disable once InconsistentNaming
-        protected DatabaseContext _entities;
+        protected readonly DatabaseContext _entities;
 
-        // ReSharper disable once InconsistentNaming
         protected readonly IDbSet<BaseEntity> _dbset;
 
-        // ReSharper disable once PublicConstructorInAbstractClass
         public BaseRepository(DatabaseContext context)
         {
-
             _entities = context;
             _dbset = context.Set<BaseEntity>();
-
-
         }
 
         public Result<IEnumerable<BaseDto>> GetAll()
@@ -35,13 +29,16 @@ namespace Template.DAL.BaseRepository
             try
             {
                 var entities = AutoMapper.Mapper.Map<IEnumerable<BaseEntity>, IEnumerable<BaseDto>>(_dbset);
-                return new Result(entities);
+                return new Result<IEnumerable<BaseDto>>(entities);
             }
             catch (Exception e)
             {
-                return null;
+                var failure =new  Result<IEnumerable<BaseDto>>();
+                var error= new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
-
         }
 
         public Result<IEnumerable<BaseDto>> GetAllBy(Expression<Func<BaseEntity, bool>> predicate)
@@ -50,13 +47,16 @@ namespace Template.DAL.BaseRepository
             {
                 var query = _dbset.Where(predicate).AsEnumerable();
                 var mappedquery = AutoMapper.Mapper.Map<IEnumerable<BaseEntity>, IEnumerable<BaseDto>>(query);
-                return mappedquery;
+                return new Result<IEnumerable<BaseDto>>(mappedquery);
             }
             catch (Exception e)
             {
-                return null;
+                var failure = new Result<IEnumerable<BaseDto>>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
-
         }
 
         public Result<BaseDto> GetFirstBy(Expression<Func<BaseEntity, bool>> predicate)
@@ -65,14 +65,17 @@ namespace Template.DAL.BaseRepository
             {
                 var query = _dbset.FirstOrDefault(predicate);
                 var mappedquery = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(query);
-                return mappedquery;
+                return new Result<BaseDto>(mappedquery);
             }
             catch (Exception e)
             {
 
-                return null;
+                var failure = new Result<BaseDto>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
-
         }
 
         public Result<BaseDto> GetById(int Id)
@@ -81,14 +84,16 @@ namespace Template.DAL.BaseRepository
             {
                 var query = _dbset.Find(Id);
                 var mappedquery = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(query);
-                return mappedquery;
+                return new Result<BaseDto>(mappedquery);
             }
             catch (Exception e)
             {
-
-                return null;
+                var failure = new Result<BaseDto>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
-
         }
 
         public Result<BaseDto> Add(BaseDto entity)
@@ -98,14 +103,16 @@ namespace Template.DAL.BaseRepository
                 var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
                 var addedEntity = _dbset.Add(mappedEntity);
                 var entityToReturn = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(addedEntity);
-                return entityToReturn;
+                return new Result<BaseDto>(entityToReturn);
             }
             catch (Exception e)
             {
-
-                return null;
-            }
-            
+                var failure = new Result<BaseDto>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
+            }            
         }
 
         public Result<bool> Delete(BaseDto entity)
@@ -114,11 +121,15 @@ namespace Template.DAL.BaseRepository
             {
                 var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
                 _dbset.Remove(mappedEntity);
-                return true;
+                return new Result<bool>(true);
             }
             catch (Exception e)
             {
-                return false;
+                var failure = new Result<bool>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
         }
 
@@ -128,12 +139,16 @@ namespace Template.DAL.BaseRepository
             try
             {
                 var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
-                _entities.Entry(entity).State = EntityState.Modified;
-                return true;
+                _entities.Entry(mappedEntity).State = EntityState.Modified;
+                return new Result<bool>(true);
             }
             catch (Exception e)
             {
-                return false;
+                var failure = new Result<bool>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
             }
         }
 
@@ -142,13 +157,16 @@ namespace Template.DAL.BaseRepository
             try
             {
                 _entities.SaveChanges();
-                return true;
+                return new Result<bool>(true);
             }
             catch (Exception e)
             {
-                return false;
-            }
-            
+                var failure = new Result<bool>();
+                var error = new Error();
+                error.ErrorMessage = e.Message;
+                failure.Errors.Add(error);
+                return failure;
+            }            
         }
     }
 }
