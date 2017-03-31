@@ -53,6 +53,11 @@
     <Compile Include="Entities\BookType.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\PublishingHouse.cs" />
+    <Compile Include="Interfaces\Repository\IAuthorRepository.cs" />
+    <Compile Include="Interfaces\Repository\baseRepository\IBaseRepository.cs" />
+    <Compile Include="Interfaces\Repository\IBookTypeRepository.cs" />
+    <Compile Include="Interfaces\Repository\IPublishingHouseRepository.cs" />
+    <Compile Include="Interfaces\Repository\IBookRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
