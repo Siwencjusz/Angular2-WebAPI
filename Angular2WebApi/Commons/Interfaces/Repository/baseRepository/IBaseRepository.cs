@@ -13,13 +13,13 @@ namespace Commons.Interfaces.Repository.baseRepository
         where TEntity : BaseEntity
         where TViewModel : BaseDto
     {
-        IEnumerable<TViewModel> GetAll();
-        IEnumerable<TViewModel> GetAllBy(Expression<Func<TEntity, bool>> predicate);
-        TViewModel GetFirstBy(Expression<Func<TEntity, bool>> predicate);
-        TViewModel GetById(int id);
-        TViewModel Add(TViewModel entity);
-        TViewModel Delete(TViewModel entity);
-        bool Edit(TViewModel entity);
-        bool Save();
+        Result<IEnumerable<TViewModel>> GetAll();
+        Result<IEnumerable<TViewModel>> GetAllBy(Expression<Func<TEntity, bool>> predicate);
+        Result<TViewModel> GetFirstBy(Expression<Func<TEntity, bool>> predicate);
+        Result<TViewModel> GetById(int Id);
+        Result<TViewModel> Add(TViewModel entity);
+        Result<bool> Delete(TViewModel entity);
+        Result<bool> Edit(TViewModel entity);
+        Result<bool> Save();
     }
 }

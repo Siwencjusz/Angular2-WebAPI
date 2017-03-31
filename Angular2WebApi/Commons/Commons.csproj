@@ -30,9 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +55,7 @@
     <Compile Include="Entities\BookType.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\PublishingHouse.cs" />
+    <Compile Include="GenericResult.cs" />
     <Compile Include="Interfaces\Repository\IAuthorRepository.cs" />
     <Compile Include="Interfaces\Repository\baseRepository\IBaseRepository.cs" />
     <Compile Include="Interfaces\Repository\IBookTypeRepository.cs" />

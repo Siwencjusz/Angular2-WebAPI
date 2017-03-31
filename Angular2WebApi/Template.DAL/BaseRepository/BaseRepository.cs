@@ -1,55 +1,154 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Commons;
 using Commons.DTOs.BaseDto;
 using Commons.Entities.BaseEntity;
 using Commons.Interfaces.Repository.baseRepository;
 
 namespace Template.DAL.BaseRepository
 {
-    public class BaseRepository:IBaseRepository<BaseEntity,BaseDto>
+    public class BaseRepository : IBaseRepository<BaseEntity, BaseDto>
     {
-        public IEnumerable<BaseDto> GetAll()
+        // ReSharper disable once InconsistentNaming
+        protected DatabaseContext _entities;
+
+        // ReSharper disable once InconsistentNaming
+        protected readonly IDbSet<BaseEntity> _dbset;
+
+        // ReSharper disable once PublicConstructorInAbstractClass
+        public BaseRepository(DatabaseContext context)
         {
-            throw new NotImplementedException();
+
+            _entities = context;
+            _dbset = context.Set<BaseEntity>();
+
+
         }
 
-        public IEnumerable<BaseDto> GetAllBy(Expression<Func<BaseEntity, bool>> predicate)
+        public Result<IEnumerable<BaseDto>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entities = AutoMapper.Mapper.Map<IEnumerable<BaseEntity>, IEnumerable<BaseDto>>(_dbset);
+                return new Result(entities);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
 
-        public BaseDto GetFirstBy(Expression<Func<BaseEntity, bool>> predicate)
+        public Result<IEnumerable<BaseDto>> GetAllBy(Expression<Func<BaseEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _dbset.Where(predicate).AsEnumerable();
+                var mappedquery = AutoMapper.Mapper.Map<IEnumerable<BaseEntity>, IEnumerable<BaseDto>>(query);
+                return mappedquery;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
 
-        public BaseDto GetById(int id)
+        public Result<BaseDto> GetFirstBy(Expression<Func<BaseEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _dbset.FirstOrDefault(predicate);
+                var mappedquery = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(query);
+                return mappedquery;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+
         }
 
-        public BaseDto Add(BaseDto entity)
+        public Result<BaseDto> GetById(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _dbset.Find(Id);
+                var mappedquery = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(query);
+                return mappedquery;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+
         }
 
-        public BaseDto Delete(BaseDto entity)
+        public Result<BaseDto> Add(BaseDto entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
+                var addedEntity = _dbset.Add(mappedEntity);
+                var entityToReturn = AutoMapper.Mapper.Map<BaseEntity, BaseDto>(addedEntity);
+                return entityToReturn;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+            
         }
 
-        public bool Edit(BaseDto entity)
+        public Result<bool> Delete(BaseDto entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
+                _dbset.Remove(mappedEntity);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
-        public bool Save()
+        public Result<bool> Edit(BaseDto entity)
         {
-            throw new NotImplementedException();
+            
+            try
+            {
+                var mappedEntity = AutoMapper.Mapper.Map<BaseDto, BaseEntity>(entity);
+                _entities.Entry(entity).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public Result<bool> Save()
+        {
+            try
+            {
+                _entities.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
     }
 }
