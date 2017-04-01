@@ -9,7 +9,7 @@ using Commons.Interfaces.Repository.baseRepository;
 
 namespace Commons.Interfaces.Repository
 {
-    interface IBookRepository : IBaseRepository<Book, BookDto>
+    public interface IBookRepository : IBaseRepository<Book, BookDto>
     {
     }
 }
