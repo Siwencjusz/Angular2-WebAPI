@@ -115,7 +115,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AuthotRepository.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
+    <Compile Include="Repositories\BookTypeTypeRepository.cs" />
+    <Compile Include="Repositories\PublishingHouseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
