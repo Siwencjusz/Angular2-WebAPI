@@ -16,7 +16,7 @@ namespace Template.DAL.BaseRepository
 
         protected readonly IDbSet<T> _dbset;
 
-        public BaseRepository(DatabaseContext context)
+        protected BaseRepository(DatabaseContext context)
         {
             _entities = context;
             _dbset = context.Set<T>();
@@ -32,8 +32,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure =new  Result<IEnumerable<TDto>>();
-                var error= new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
@@ -50,14 +49,13 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<IEnumerable<TDto>>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
         }
 
-        public virtual Result<TDto> GetFirstBy(Expression<Func<T, bool>> predicate)
+        public virtual Result<TDto> GetFirstBy(Expression<Func<BaseDto, bool>> predicate)
         {
             try
             {
@@ -69,8 +67,7 @@ namespace Template.DAL.BaseRepository
             {
 
                 var failure = new Result<TDto>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
@@ -87,8 +84,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<TDto>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
@@ -106,8 +102,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<TDto>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }            
@@ -124,8 +119,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<bool>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
@@ -143,8 +137,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<bool>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }
@@ -160,8 +153,7 @@ namespace Template.DAL.BaseRepository
             catch (Exception e)
             {
                 var failure = new Result<bool>();
-                var error = new Error();
-                error.ErrorMessage = e.Message;
+                var error = new Error {ErrorMessage = e.Message};
                 failure.Errors.Add(error);
                 return failure;
             }            

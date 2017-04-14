@@ -107,6 +107,8 @@
   <ItemGroup>
     <Compile Include="Autofac\EFModule.cs" />
     <Compile Include="Autofac\RepositoryModule.cs" />
+    <Compile Include="Automapper\AutomapperConfig.cs" />
+    <Compile Include="Automapper\Mappings.cs" />
     <Compile Include="BaseRepository\BaseRepository.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Migrations\201703291752383_Initial_Book_Shop_Migration.cs" />

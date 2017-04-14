@@ -15,7 +15,7 @@ namespace Commons.Interfaces.Repository.baseRepository
     {
         Result<IEnumerable<TViewModel>> GetAll();
         Result<IEnumerable<TViewModel>> GetAllBy(Expression<Func<TEntity, bool>> predicate);
-        Result<TViewModel> GetFirstBy(Expression<Func<TEntity, bool>> predicate);
+        Result<TViewModel> GetFirstBy(Expression<Func<BaseDto, bool>> predicate);
         Result<TViewModel> GetById(int Id);
         Result<TViewModel> Add(TViewModel entity);
         Result<bool> Delete(TViewModel entity);

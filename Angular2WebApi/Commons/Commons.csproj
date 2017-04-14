@@ -56,6 +56,7 @@
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\PublishingHouse.cs" />
     <Compile Include="GenericResult.cs" />
+    <Compile Include="Interfaces\Manager\IBaseManager.cs" />
     <Compile Include="Interfaces\Repository\IAuthorRepository.cs" />
     <Compile Include="Interfaces\Repository\baseRepository\IBaseRepository.cs" />
     <Compile Include="Interfaces\Repository\IBookTypeRepository.cs" />
