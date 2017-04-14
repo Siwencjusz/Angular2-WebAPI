@@ -97,7 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autofac\ManagerModule.cs" />
+    <Compile Include="Managers\AuthorManager.cs" />
     <Compile Include="Managers\BaseManager\BaseManager.cs" />
+    <Compile Include="Managers\BookManager.cs" />
+    <Compile Include="Managers\BookTypeManager.cs" />
+    <Compile Include="Managers\PublishingHouseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

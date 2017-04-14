@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Commons.DTOs.BaseDto;
 using Commons.Entities.BaseEntity;
 
-namespace Commons.Interfaces.Manager
+namespace Commons.Interfaces.Manager.baseManager
 {
     public interface IBaseManager<T> where T : BaseDto
     {

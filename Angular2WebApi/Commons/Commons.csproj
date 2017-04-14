@@ -56,7 +56,11 @@
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\PublishingHouse.cs" />
     <Compile Include="GenericResult.cs" />
-    <Compile Include="Interfaces\Manager\IBaseManager.cs" />
+    <Compile Include="Interfaces\Manager\baseManager\IBaseManager.cs" />
+    <Compile Include="Interfaces\Manager\IAuthorManager.cs" />
+    <Compile Include="Interfaces\Manager\IBookManager.cs" />
+    <Compile Include="Interfaces\Manager\IBookTypeManager.cs" />
+    <Compile Include="Interfaces\Manager\IPublishingHouseManager.cs" />
     <Compile Include="Interfaces\Repository\IAuthorRepository.cs" />
     <Compile Include="Interfaces\Repository\baseRepository\IBaseRepository.cs" />
     <Compile Include="Interfaces\Repository\IBookTypeRepository.cs" />

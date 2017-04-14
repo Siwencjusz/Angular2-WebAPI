@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 using Commons.DTOs.BaseDto;
 using Commons.Entities.BaseEntity;
 using Commons.Interfaces.Manager;
+using Commons.Interfaces.Manager.baseManager;
 using Commons.Interfaces.Repository.baseRepository;
 
 namespace Template.BLL.Managers.BaseManager
 {
-    public class BaseManager:IBaseManager<BaseDto>
+    public abstract class BaseManager<T>:IBaseManager<BaseDto> where T : Commons.DTOs.BaseDto.BaseDto
     {
         public IBaseRepository<BaseEntity,BaseDto> _repository;
         public BaseManager(IBaseRepository<BaseEntity, BaseDto> repository)
         {
             _repository = repository;
         }
-        public IEnumerable<BaseDto> GetAll()
+        public virtual IEnumerable<BaseDto> GetAll()
         {
             var result = _repository.GetAll();
             if (result.IsValid && !result.Errors.Any())
@@ -28,7 +29,7 @@ namespace Template.BLL.Managers.BaseManager
             return new List<BaseDto>();
         }
 
-        public IEnumerable<BaseDto> GetAllBy(Expression<Func<BaseEntity, bool>> predicate)
+        public virtual IEnumerable<BaseDto> GetAllBy(Expression<Func<BaseEntity, bool>> predicate)
         {
             var result= _repository.GetAllBy(predicate);
             if (result.IsValid && !result.Errors.Any())
@@ -38,7 +39,7 @@ namespace Template.BLL.Managers.BaseManager
             return new List<BaseDto>();
         }
 
-        public BaseDto GetBy(Expression<Func<BaseEntity, bool>> predicate)
+        public virtual BaseDto GetBy(Expression<Func<BaseEntity, bool>> predicate)
         {
             var result = _repository.GetFirstBy(predicate);
             if (result.IsValid && !result.Errors.Any())
@@ -48,17 +49,17 @@ namespace Template.BLL.Managers.BaseManager
             return new BaseDto();
         }
 
-        public void Create(BaseDto entity)
+        public virtual void Create(BaseDto entity)
         {
             _repository.Add(entity);
         }
 
-        public void Delete(BaseDto entity)
+        public virtual void Delete(BaseDto entity)
         {
             _repository.Delete(entity);
         }
 
-        public void Update(BaseDto entity)
+        public virtual void Update(BaseDto entity)
         {
             _repository.Edit(entity);
         }
