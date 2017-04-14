@@ -13,7 +13,7 @@ namespace Commons.Interfaces.Manager
     {
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAllBy(Expression<Func<BaseEntity, bool>> predicate);
-        T GetBy(Expression<Func<T, bool>> predicate);
+        T GetBy(Expression<Func<BaseEntity, bool>> predicate);
         void Create(T entity);
         void Delete(T entity);
         void Update(T entity);

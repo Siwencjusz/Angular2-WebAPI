@@ -55,7 +55,9 @@ namespace Template.DAL.BaseRepository
             }
         }
 
-        public virtual Result<TDto> GetFirstBy(Expression<Func<BaseDto, bool>> predicate)
+
+
+        public virtual Result<TDto> GetFirstBy(Expression<Func<T, bool>> predicate)
         {
             try
             {

@@ -38,7 +38,7 @@ namespace Template.BLL.Managers.BaseManager
             return new List<BaseDto>();
         }
 
-        public BaseDto GetBy(Expression<Func<BaseDto, bool>> predicate)
+        public BaseDto GetBy(Expression<Func<BaseEntity, bool>> predicate)
         {
             var result = _repository.GetFirstBy(predicate);
             if (result.IsValid && !result.Errors.Any())
