@@ -231,6 +231,8 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebApi\BaseApi\BaseApiController.cs" />
+    <Compile Include="WebApi\BookApiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -297,6 +299,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commons\Commons.csproj">
+      <Project>{06B73FED-51E4-433E-A65D-6C90FF798CCF}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Template.BLL\Template.BLL.csproj">
+      <Project>{5E538A88-8FC6-4CF6-B8A1-76DA9152DCBE}</Project>
+      <Name>Template.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Template.DAL\Template.DAL.csproj">
+      <Project>{32C9E157-0451-4FD1-87C7-C0F09708965E}</Project>
+      <Name>Template.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
