@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,8 +17,10 @@ namespace Angular2WebApi
     {
         public void Configuration(IAppBuilder app)
         {
-            AutomapperConfig.Configuration();
+
             AutofacConfig.SetUpAutofac();
+            AutomapperConfig.Configuration();
+
             ConfigureAuth(app);
             app.UseWebApi(WebApiConfig.Register());
         }

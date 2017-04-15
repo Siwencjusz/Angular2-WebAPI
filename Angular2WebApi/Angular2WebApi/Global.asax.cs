@@ -14,13 +14,17 @@ namespace Angular2WebApi
     {
         protected void Application_Start()
         {
+  
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+       
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
             AutomapperConfig.Configuration();
             AutofacConfig.SetUpAutofac();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

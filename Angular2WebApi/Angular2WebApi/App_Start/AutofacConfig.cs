@@ -14,7 +14,7 @@ namespace Angular2WebApi
         public static void SetUpAutofac()
         {
             var builder = new Autofac.ContainerBuilder();
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest(); 
             builder.RegisterControllers(typeof(WebApiApplication).Assembly).PropertiesAutowired();
             builder.RegisterModule(new RepositoryModule());
             builder.RegisterModule(new ManagerModule());
